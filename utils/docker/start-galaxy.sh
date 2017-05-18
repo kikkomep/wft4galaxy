@@ -16,11 +16,12 @@ docker run -d -e GALAXY_CONFIG_MASTER_API_KEY=${GALAXY_CONFIG_MASTER_API_KEY=HSN
 export GALAXY_URL="http://${GALAXY_DOCKER_HOST}:${GALAXY_PORT}"
 
 # wait for Galaxy
-printf '\nWaiting for Galaxy...'
-until $(curl --output /dev/null --silent --head --fail ${GALAXY_URL}); do
-    printf '.'
-    sleep 5
-done
+printf "\nWaiting for Galaxy @ (${GALAXY_URL} ..."
+#until $(curl --output /dev/null --silent --head --fail ${GALAXY_URL}); do
+#    printf '.'
+#    sleep 5
+#done
+sleep 15
 printf ' Started\n'
 
 # Galaxy info
