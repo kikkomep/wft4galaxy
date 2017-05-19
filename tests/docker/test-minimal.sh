@@ -12,4 +12,6 @@ cd ${IMAGE_ROOT_PATH}
 ./build-remote.sh && cd -
 
 # Run examples  # FIXME: change the repo and version TAGs
-wft4galaxy-docker --repository kikkomep --version minimal-travis-integration -f examples/change_case/workflow-test.yml
+wft4galaxy-docker --repository kikkomep --version minimal-travis-integration \
+                  --server ${GALAXY_URL} --api-key ${GALAXY_CONFIG_MASTER_API_KEY} \
+                  -f examples/change_case/workflow-test.yml
