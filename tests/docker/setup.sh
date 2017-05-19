@@ -23,5 +23,5 @@
 #                        ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL}
 
 
-
+GALAXY_API_KEY=${1}
 echo "Galaxy URL: ${GALAXY_API_KEY}"
