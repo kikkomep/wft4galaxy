@@ -27,8 +27,7 @@ before_install:
                             ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL})
 
 script:
-- echo "Galaxy URL: ${GALAXY_URL}"
-- echo "Galaxy API KEY: ${GALAXY_API_KEY}"
+- echo "Galaxy URL: ${GALAXY_API_KEY}"
 
 
 after_success:
