@@ -26,10 +26,10 @@ before_install:
                               --server ${GALAXY_SERVER} --api-key ${GALAXY_CONFIG_MASTER_API_KEY} \
                               ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL})
 
-#  - echo "Created ${GALAXY_USERNAME} (API KEY: ${GALAXY_API_KEY})"
-
 script:
-  - echo "${GALAXY_URL}"
+  - echo "Galaxy URL: ${GALAXY_URL}"
+  - echo "Galaxy API KEY: ${GALAXY_API_KEY}"
+
 
 after_success:
   - docker rm -f ${GALAXY_CONTAINER_NAME}
