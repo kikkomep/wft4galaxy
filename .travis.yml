@@ -20,17 +20,16 @@ env:
 #    - USE_NETWORK=false
 
 before_install:
-#  - pip install -r requirements.txt
-#  - echo "DOCKER HOST:${GALAXY_DOCKER_HOST}
-#  - utils/docker/start-galaxy.sh ${GALAXY_CONFIG_MASTER_API_KEY} ${GALAXY_PORT} ${GALAXY_DOCKER_HOST} ${GALAXY_CONTAINER_NAME}
-#  - export GALAXY_API_KEY=$(utils/docker/create-galaxy-user.py --with-api-key \
-#                              --server ${GALAXY_SERVER} --api-key ${GALAXY_CONFIG_MASTER_API_KEY} \
-#                              ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL})
+  - pip install -r requirements.txt
+  - utils/docker/start-galaxy.sh ${GALAXY_CONFIG_MASTER_API_KEY} ${GALAXY_PORT} ${GALAXY_DOCKER_HOST} ${GALAXY_CONTAINER_NAME}
+  - export GALAXY_API_KEY=$(utils/docker/create-galaxy-user.py --with-api-key \
+                              --server ${GALAXY_SERVER} --api-key ${GALAXY_CONFIG_MASTER_API_KEY} \
+                              ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL})
 
 #  - echo "Created ${GALAXY_USERNAME} (API KEY: ${GALAXY_API_KEY})"
 
 script:
-  - echo "http://${GALAXY_DOCKER_HOST}:${GALAXY_PORT}"
+  - echo "${GALAXY_URL}"
 
 after_success:
   - docker rm -f ${GALAXY_CONTAINER_NAME}
