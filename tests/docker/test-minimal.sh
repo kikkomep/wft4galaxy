@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-IMAGE_ROOT_PATH=${1:-"../../utils/docker/minimal"}
+# FIXME: check path
+IMAGE_ROOT_PATH=${1:-"utils/docker/minimal"}
 
 # download wft4galaxy script
 curl -s https://raw.githubusercontent.com/phnmnl/wft4galaxy/develop/utils/docker/install.sh | bash /dev/stdin .
