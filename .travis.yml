@@ -30,9 +30,9 @@ install:
 
 script:
 - GALAXY_API_KEY=$(cat "wft4galaxy.id")
-- echo "Galaxy URL: ${GALAXY_URL}"
-- echo "Galaxy KEY: ${GALAXY_API_KEY}"
-- wft4galaxy -f examples/workflow-test-suite.yml --debug
+#- echo "Galaxy URL: ${GALAXY_URL}"
+#- echo "Galaxy KEY: ${GALAXY_API_KEY}"
+- wft4galaxy -f examples/workflow-test-suite.yml --debug --server ${GALAXY_URL} --api-key ${GALAXY_API_KEY}
 
 
 after_script:
