@@ -28,6 +28,8 @@ before_install:
 script:
 #- GALAXY_API_KEY=$(cat "wft4galaxy.id")
 - tests/docker/setup.sh ${GALAXY_API_KEY}
+- echo "Galaxy URL: ${GALAXY_API_KEY}"
+- echo "Galaxy KEY: ${GALAXY_API_KEY}"
 
 
 after_script:
