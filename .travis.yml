@@ -24,12 +24,14 @@ before_install:
 - pip install -r requirements.txt
 - utils/docker/start-galaxy.sh ${GALAXY_CONFIG_MASTER_API_KEY} ${GALAXY_PORT} ${GALAXY_DOCKER_HOST} ${GALAXY_CONTAINER_NAME}
 - GALAXY_API_KEY=$(utils/docker/create-galaxy-user.py --debug --server ${GALAXY_URL} --api-key ${GALAXY_CONFIG_MASTER_API_KEY} ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL} --with-api-key)
+- echo "Galaxy URL: ${GALAXY_URL}"
+- echo "Galaxy KEY: ${GALAXY_API_KEY}"
+
+install:
+- python setup.py install
 
 script:
-#- GALAXY_API_KEY=$(cat "wft4galaxy.id")
-- tests/docker/setup.sh ${GALAXY_API_KEY}
-- echo "Galaxy URL: ${GALAXY_API_KEY}"
-- echo "Galaxy KEY: ${GALAXY_API_KEY}"
+- wft4galaxy -f examples/workflow-test-suite.yml --debug
 
 
 after_script:
