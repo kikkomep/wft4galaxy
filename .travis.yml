@@ -9,7 +9,7 @@ env:
   global:
     - GALAXY_CONFIG_MASTER_API_KEY=HSNiugRFvgT574F43jZ7N9F3
     - GALAXY_PORT=30700
-    - GALAXY_DOCKER_HOST=$(hostname)
+    - GALAXY_DOCKER_HOST=127.0.0.1
     - GALAXY_CONTAINER_NAME=galaxy-server
     - GALAXY_USERNAME=wft4galaxy
     - GALAXY_USER_PASSWORD=wft4galaxy-tester
