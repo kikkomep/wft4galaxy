@@ -60,7 +60,6 @@ def create_user(galaxy_instance, username, password, user_email):
 def main():
     # configure logger
     _logging.basicConfig(level=_logging.ERROR, format="%(asctime)s [%(name)s] [%(levelname)+4.5s]  %(message)s")
-    _logger.debug("Configuration: %s", options)
 
     try:
         # parse args
@@ -70,6 +69,7 @@ def main():
         # update log level
         if options.debug:
             _logging.basicConfig(level=_logging.DEBUG)
+        _logger.debug("Configuration: %s", options)
 
         # galaxy instance configuration
         gi = _GalaxyInstance(url=options.server, key=options.api_key)
