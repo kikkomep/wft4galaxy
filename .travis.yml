@@ -27,8 +27,8 @@ before_install:
                             ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL})
 
 script:
-- echo "Galaxy URL: ${GALAXY_API_KEY}"
+- utils/docker/setup.sh
 
 
-after_success:
+after_script:
 - docker rm -f ${GALAXY_CONTAINER_NAME}
