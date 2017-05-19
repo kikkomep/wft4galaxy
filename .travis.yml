@@ -27,7 +27,7 @@ before_install:
                             ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL})
 
 script:
-- utils/docker/setup.sh
+- tests/docker/setup.sh
 
 
 after_script:
