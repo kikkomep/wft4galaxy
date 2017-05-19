@@ -18,11 +18,10 @@ export GALAXY_URL=${GALAXY_URL//[[:blank:]]/}
 
 # wait for Galaxy
 printf "\nWaiting for Galaxy @ (${GALAXY_URL} ..."
-#until $(curl --output /dev/null --silent --head --fail ${GALAXY_URL}); do
-#    printf '.'
-#    sleep 5
-#done
-sleep 15
+until $(curl --output /dev/null --silent --head --fail ${GALAXY_URL}); do
+    printf '.'
+    sleep 5
+done
 printf ' Started\n'
 
 # Galaxy info
