@@ -20,6 +20,7 @@ git_repo_name=$(echo ${git_url} | sed -E "s/.*[:\/](.*)\/(.*)(\.git)/\2/")
 
 #replace original repo_url to use the HTTPS protocol
 git_url="https://github.com/${git_repo_owner}/${git_repo_name}.git"
+echo ${git_url}
 
 # infer image type (minimal|develop) from the containing folder
 image_type=$(basename "$(pwd)")
