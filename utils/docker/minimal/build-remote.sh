@@ -14,7 +14,7 @@ source ${script_path}/../set-docker-image-info.sh
 cd "${script_path}"
 
 # override just for debugs
-IMAGE="kikkomep/wft4galaxy-minimal:travis-integration"
+IMAGE="kikkomep/wft4galaxy-minimal:mimimal-travis-integration"
 
 # build the Docker image
 docker build --build-arg git_branch=${GIT_BRANCH} --build-arg git_url=${GIT_HTTPS} -t ${IMAGE} .
