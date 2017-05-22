@@ -13,7 +13,7 @@ fi
 echo "Param GitBranch: ${git_branch}!!!"
 if [ -z "${git_branch}" ] ; then
 	echo "Git branch not specified.  Using local repository's current branch" >&2
-	git_branch=$(git rev-parse --abbrev-ref HEAD)
+	git_branch=$(git symbolic-ref HEAD | sed 's!refs\/heads\/!!')
 fi
 
 git_repo_owner=$(echo ${git_url} | sed -E "s/.*[:\/](.*)\/(.*)(\.git)/\1/")
