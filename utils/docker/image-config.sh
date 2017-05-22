@@ -16,6 +16,7 @@ if [ -z "${git_branch}" ] ; then
 	git_branch=$(git rev-parse --abbrev-ref HEAD)
 fi
 
+echo "${git_url}"
 git_repo_owner=$(echo ${git_url} | sed -E "s/.*[:\/](.*)\/(.*)(\.git)/\1/")
 git_repo_name=$(echo ${git_url} | sed -E "s/.*[:\/](.*)\/(.*)(\.git)/\2/")
 
