@@ -9,11 +9,15 @@ python:
 services:
   - docker
 
+addons:
+  hosts:
+    - galaxy
+
 env:
   global:
     - GALAXY_CONFIG_MASTER_API_KEY=HSNiugRFvgT574F43jZ7N9F3
     - GALAXY_PORT=30700
-    - GALAXY_DOCKER_HOST=$(hostname)
+    - GALAXY_DOCKER_HOST=galaxy
     - GALAXY_URL=http://${GALAXY_DOCKER_HOST}:${GALAXY_PORT}
     - GALAXY_CONTAINER_NAME=galaxy-server
     - GALAXY_USERNAME=wft4galaxy
