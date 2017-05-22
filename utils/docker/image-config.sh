@@ -10,6 +10,7 @@ if [ -z "${git_url}" ]; then
 	git_url=$(git config --get remote.${first_remote}.url)
 fi
 
+echo "Param GitBranch: ${git_branch}!!!"
 if [ -z "${git_branch}" ] ; then
 	echo "Git branch not specified.  Using local repository's current branch" >&2
 	git_branch=$(git rev-parse --abbrev-ref HEAD)
