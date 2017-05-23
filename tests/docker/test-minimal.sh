@@ -17,7 +17,7 @@ cd ${IMAGE_ROOT_PATH}
 ./build-remote.sh --branch ${TRAVIS_BRANCH} && cd -
 
 # FIXME: remove... it is just for debug
-docker --rm --network galaxy \
+docker run --rm --network galaxy \
             ubuntu bash -c "apt-get update && apt-get install -y iputils-ping && timeout 10 ping 172.18.0.22"
 
 
