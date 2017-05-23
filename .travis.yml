@@ -4,21 +4,20 @@ language: python
 
 python:
   - "2.7"
-  - "3.6"
 
 services:
   - docker
 
-addons:
-  hosts:
-    - galaxy
+#addons:
+#  hosts:
+#    - galaxy
 
 env:
   global:
     - GALAXY_CONFIG_MASTER_API_KEY=HSNiugRFvgT574F43jZ7N9F3
     - GALAXY_NETWORK=galaxy
     - GALAXY_PORT=30700
-    - GALAXY_DOCKER_HOST=galaxy
+    - GALAXY_DOCKER_HOST=prova
     - GALAXY_URL=http://${GALAXY_DOCKER_HOST}:${GALAXY_PORT}
     - GALAXY_CONTAINER_NAME=galaxy-server
     - GALAXY_USERNAME=wft4galaxy
@@ -30,19 +29,13 @@ env:
 #    - USE_NETWORK=false
 
 before_install:
-- pip install -r requirements.txt
-- docker network create --driver bridge --subnet=172.18.0.0/16 ${GALAXY_NETWORK}
-- utils/docker/start-galaxy.sh ${GALAXY_CONFIG_MASTER_API_KEY} ${GALAXY_NETWORK} ${GALAXY_PORT} ${GALAXY_DOCKER_HOST} ${GALAXY_CONTAINER_NAME}
-- utils/docker/create-galaxy-user.py --debug --server ${GALAXY_URL} --api-key ${GALAXY_CONFIG_MASTER_API_KEY} ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL} --with-api-key
+- docker run -itd --hostname ${GALAXY_DOCKER_HOST} --name ${GALAXY_CONTAINER_NAME} ubuntu
 
 install:
-- python setup.py install
+#- python setup.py install
 
 script:
-- GALAXY_API_KEY=$(cat "wft4galaxy.id")
-- wft4galaxy -f examples/change_case/workflow-test.yml --server ${GALAXY_URL} --api-key ${GALAXY_API_KEY}
-#- export GALAXY_URL=http://${GALAXY_CONTAINER_NAME}:${GALAXY_PORT}
-- tests/docker/test-minimal.sh "utils/docker/minimal" ${GALAXY_URL} ${GALAXY_API_KEY}
+- docker run -it --rm ubuntu bash -c "apt-get update && apt-get install -y inetutils-ping && timeout 10 ping ${GALAXY_DOCKER_HOST}"
 
 
 after_script:
