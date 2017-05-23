@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+GALAXY_URL=$1
+GALAXY_API_KEY=$2
+
 # FIXME: check path
 IMAGE_ROOT_PATH=${1:-"utils/docker/minimal"}
 
@@ -15,5 +18,5 @@ cd ${IMAGE_ROOT_PATH}
 # Run examples  # FIXME: change the repo and version TAGs
 wft4galaxy-docker --skip-update --repository kikkomep --version minimal-travis-integration \
                   --network "galaxy" \
-                  --server ${GALAXY_URL} --api-key ${GALAXY_CONFIG_MASTER_API_KEY} \
+                  --server ${GALAXY_URL} --api-key ${GALAXY_API_KEY} \
                   -f examples/change_case/workflow-test.yml
