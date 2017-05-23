@@ -18,5 +18,6 @@ cd ${IMAGE_ROOT_PATH}
 # Run examples  # FIXME: change the repo and version TAGs
 wft4galaxy-docker --skip-update --repository kikkomep --version minimal-travis-integration \
                   --network "galaxy" \
+                  --add-host "galaxy-server:172.18.0.22" \
                   --server ${GALAXY_URL} --api-key ${GALAXY_API_KEY} \
                   -f examples/change_case/workflow-test.yml

@@ -12,6 +12,7 @@ docker run -d -e GALAXY_CONFIG_MASTER_API_KEY=${GALAXY_CONFIG_MASTER_API_KEY=HSN
               -p ${GALAXY_PORT}:80 -p 8021:21 -p 8022:22 \
               --network ${GALAXY_NETWORK} \
               --name ${GALAXY_CONTAINER_NAME} \
+              --ip 172.18.0.22 \
               bgruening/galaxy-stable
 
 # set the Galaxy URL

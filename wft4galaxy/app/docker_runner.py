@@ -109,6 +109,7 @@ class _CommandLineHelper:
         main_parser.add_argument('--port', help='Docker port to expose', action="append", default=[])
         main_parser.add_argument('--volume', help='Docker volume to mount', type=str, action="append", default=[])
         main_parser.add_argument('--network', help='Docker network to join', default=None)
+        main_parser.add_argument('--add-host', help='Add host to the Docker container', default=None)
         main_parser.add_argument('--debug', help='Enable debug mode', action='store_true')
 
         # reference to the global options
@@ -378,6 +379,9 @@ class NonInteractiveContainer(Container):
         # attach container to a specific Docker network
         if options.network:
             cmd.extend(["--network", options.network])
+        if options.add_host:
+            cmd.extend(["--add-host", options.add_host])
+
         # Galaxy environment variables
         cmd.extend(["-e", "GALAXY_URL={0}".format(options.server)])
         cmd.extend(["-e", "GALAXY_API_KEY={0}".format(options.api_key)])
