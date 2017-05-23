@@ -29,13 +29,14 @@ env:
 #    - USE_NETWORK=false
 
 before_install:
-- docker run -itd --hostname ${GALAXY_DOCKER_HOST} --name ${GALAXY_CONTAINER_NAME} ubuntu
+- docker network create --driver bridge --subnet=172.18.0.0/16 ${GALAXY_NETWORK}
+- docker run -itd --network --ip 172.18.0.22 --hostname ${GALAXY_DOCKER_HOST} --name ${GALAXY_CONTAINER_NAME} ubuntu
 
 install:
 #- python setup.py install
 
 script:
-- docker run -it --rm ubuntu bash -c "apt-get update && apt-get install -y inetutils-ping && timeout 10 ping ${GALAXY_DOCKER_HOST}"
+- docker run -it --rm ubuntu bash -c "apt-get update && apt-get install -y inetutils-ping && timeout 10 ping 172.18.0.22"
 
 
 after_script:
