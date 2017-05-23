@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-GALAXY_URL=$1
-GALAXY_API_KEY=$2
-
 # FIXME: check path
 IMAGE_ROOT_PATH=${1:-"utils/docker/minimal"}
+# TODO: implement a better arg parsing
+GALAXY_URL=$2
+GALAXY_API_KEY=$3
 
 # download wft4galaxy script
 curl -s https://raw.githubusercontent.com/phnmnl/wft4galaxy/develop/utils/docker/install.sh | bash /dev/stdin .
