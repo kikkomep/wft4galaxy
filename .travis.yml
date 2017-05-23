@@ -18,7 +18,7 @@ env:
     - GALAXY_CONFIG_MASTER_API_KEY=HSNiugRFvgT574F43jZ7N9F3
     - GALAXY_NETWORK=galaxy
     - GALAXY_ADDRESS=172.18.0.22
-    - GALAXY_PORT=30700
+    - GALAXY_PORT=80
     - GALAXY_DOCKER_HOST=localhost
     - GALAXY_URL=http://${GALAXY_DOCKER_HOST}:${GALAXY_PORT}
     - GALAXY_CONTAINER_NAME=galaxy-server
@@ -33,7 +33,7 @@ env:
 before_install:
 - pip install -r requirements.txt
 - docker network create --driver bridge --subnet=172.18.0.0/16 ${GALAXY_NETWORK}
-- utils/docker/start-galaxy.sh ${GALAXY_CONFIG_MASTER_API_KEY} ${GALAXY_NETWORK} ${GALAXY_ADDRESS} ${GALAXY_PORT} ${GALAXY_DOCKER_HOST} ${GALAXY_CONTAINER_NAME}
+- utils/docker/start-galaxy.sh --debug --master-api-key ${GALAXY_CONFIG_MASTER_API_KEY} --network ${GALAXY_NETWORK} --ip ${GALAXY_ADDRESS} --port ${GALAXY_PORT} --docker-host ${GALAXY_DOCKER_HOST} --container-name ${GALAXY_CONTAINER_NAME}
 - utils/docker/create-galaxy-user.py --debug --server ${GALAXY_URL} --api-key ${GALAXY_CONFIG_MASTER_API_KEY} ${GALAXY_USERNAME} ${GALAXY_USER_PASSWORD} ${GALAXY_USER_EMAIL} --with-api-key
 
 install:
@@ -42,18 +42,9 @@ install:
 script:
 - GALAXY_API_KEY=$(cat "wft4galaxy.id")
 - wft4galaxy -f examples/change_case/workflow-test.yml --server ${GALAXY_URL} --api-key ${GALAXY_API_KEY}
-- export GALAXY_URL=http://${GALAXY_ADDRESS}:${80}
+- export GALAXY_URL=http://${GALAXY_ADDRESS} # use the address of the Galaxy container within the Docker network
 - tests/docker/test-minimal.sh "utils/docker/minimal" ${GALAXY_URL} ${GALAXY_API_KEY} ${GALAXY_NETWORK}
 
 
 after_script:
 - docker rm -f ${GALAXY_CONTAINER_NAME}
-
-
-# START galaxy params
-#export GALAXY_CONFIG_MASTER_API_KEY=${1:-"HSNiugRFvgT574F43jZ7N9F3"}
-#export GALAXY_NETWORK=${2:-"galaxy"}
-#export GALAXY_ADDRESS=${3:-127.0.0.1}
-#export GALAXY_PORT=${4:-30700}
-#export GALAXY_DOCKER_HOST=${5:-"localhost"}
-#export GALAXY_CONTAINER_NAME=${6:-"galaxy-server"}
