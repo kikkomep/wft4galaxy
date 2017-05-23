@@ -9,7 +9,7 @@ export GALAXY_CONTAINER_NAME=${5:-"galaxy-server"}
 
 # start Dockerized Galaxy
 docker run -d -e GALAXY_CONFIG_MASTER_API_KEY=${GALAXY_CONFIG_MASTER_API_KEY=HSNiugRFvgT574F43jZ7N9F3} \
-              -p ${GALAXY_PORT}:80 -p 8021:21 -p 8022:22 \
+              -p 172.18.0.22:${GALAXY_PORT}:80 -p 8021:21 -p 8022:22 \
               --network ${GALAXY_NETWORK} \
               --name ${GALAXY_CONTAINER_NAME} \
               --ip 172.18.0.22 \
