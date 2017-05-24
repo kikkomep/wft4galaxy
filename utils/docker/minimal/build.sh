@@ -16,8 +16,5 @@ cd "${script_path}"
 # build the Docker image
 docker build --build-arg git_branch=${GIT_BRANCH} --build-arg git_url=${GIT_HTTPS} -t ${IMAGE} .
 
-# print list of Docker images available
-docker images
-
 # restore the original path
 cd -
