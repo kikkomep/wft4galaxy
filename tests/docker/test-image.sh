@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 # FIXME: check path
 IMAGE_ROOT_PATH=${1:-"utils/docker/minimal"}
 # TODO: implement a better arg parsing
@@ -17,11 +19,11 @@ cd ${IMAGE_ROOT_PATH}
 ./build-remote.sh --branch ${TRAVIS_BRANCH} && cd -
 
 # FIXME: remove... it is just for debug
+echo "Trying to contact Galaxy sever..."
 docker run --rm --network galaxy \
-            ubuntu bash -c "apt-get update && apt-get install -y iputils-ping && timeout 10 ping 172.18.0.22"
+            ubuntu bash -c "apt-get update && apt-get install -y iputils-ping && timeout 5 ping 172.18.0.22"
 
-
-# Run examples  # FIXME: change the repo and version TAGs
+# Run examples
 wft4galaxy-docker --skip-update --repository kikkomep --version minimal-travis-integration \
                   --network ${GALAXY_NETWORK} --debug \
                   --server ${GALAXY_URL} --api-key ${GALAXY_API_KEY} \
