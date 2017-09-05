@@ -143,6 +143,7 @@ class _CommandLineHelper:
             entrypoint_parsers["jupyter"].add_argument("--web-port", default=DEFAULT_JUPYTER_PORT, type=int,
                                                        help="Jupyter port (default is {0})".format(
                                                            DEFAULT_JUPYTER_PORT))
+            entrypoint_parsers["jupyter"].add_argument("--config", default=None, help="Jupyter config file")
 
             # add generate-test options
             entrypoint_parsers["generate-test"].add_argument("history", help="History name")
@@ -319,6 +320,9 @@ class InteractiveContainer(Container):
             # prepare the Docker image (updating it if required)
             docker_image = self.get_image_name(options, options.skip_update)
 
+            if "config" in options:
+                options.volume.append("{0}:{1}".format(_os.path.abspath(_os.path.dirname(options.config)), "/config"))
+
             # volumes
             vmounts, volumes = self._parse_volumes(options.volume)
 
@@ -337,6 +341,8 @@ class InteractiveContainer(Container):
             ]
             if "web_port" in options:
                 command.extend(["--port", "{}".format(options.web_port)])
+            if "config" in options:
+                command.append("--config=/config/{0}".format(_os.path.basename(options.config)))
             import socket
             # create and run Docker containers
             client = _docker.APIClient()
